@@ -30,6 +30,7 @@ export
     Bernoulli,
     Beta,
     BetaPrime,
+    BetaBinomial,
     Binomial,
     Categorical,
     Cauchy,
@@ -227,6 +228,7 @@ include(joinpath("univariate", "arcsine.jl"))
 include(joinpath("univariate", "bernoulli.jl"))
 include(joinpath("univariate", "beta.jl"))
 include(joinpath("univariate", "betaprime.jl"))
+include(joinpath("univariate", "betabinomial.jl"))
 include(joinpath("univariate", "binomial.jl"))
 include(joinpath("univariate", "categorical.jl"))
 include(joinpath("univariate", "cauchy.jl"))
