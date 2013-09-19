@@ -128,6 +128,20 @@ end
 
 posterior_make(::Type{Exponential}, θ::Float64) = Exponential(1.0 / θ)
 
+### Gamma -- Poisson
+
+function posterior(prior::Gamma, ss::PoissonStats)
+    return Gamma(prior.shape + ss.sx, 1./ (rate(prior) + ss.sw))
+end
+
+function posterior{T<:Real}(prior::Gamma, ::Type{Poisson}, x::Array{T})
+    return posterior(prior, suffstats(Poisson, x))
+end
+
+function posterior{T<:Real}(prior::Gamma, ::Type{Poisson}, x::Array{T}, w::Array{Float64})
+    return posterior(prior, suffstats(Poisson, x, w))
+end
+
 
 ### For Normal distributions
 

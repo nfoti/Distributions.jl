@@ -125,6 +125,7 @@ export
     posterior_rand!, 
     posterior_make,  # create a distribution/model from params obtained from posterior 
     posterior_sample,
+    posterior_pred,
     scale,         # scale parameter of a distribution
     rate,          # rate parameter of a distribution
     sqmahal,       # squared Mahalanobis distance to Gaussian center
@@ -287,6 +288,8 @@ include(joinpath("conjugate-normal", "normalinversegamma.jl"))
 include(joinpath("conjugate-normal", "normalwishart.jl"))
 include(joinpath("conjugate-normal", "normalinversewishart.jl"))
 include(joinpath("conjugate-normal", "normalknowncov.jl"))
+
+include("postpred.jl")
 
 include("qq.jl")
 

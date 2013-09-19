@@ -127,6 +127,14 @@ f = fit_map(pri, Exponential, x, w)
 @test_approx_eq rate(f) mode(p)
 
 
+# Gamma - Poisson
+pri = Gamma(1.5, 2.0)
+x = rand(Poisson(2.), n)
+p = posterior(pri, Poisson, x)
+@test isa(p, Gamma)
+@test_approx_eq p.shape pri.shape + sum(x)
+@test_approx_eq rate(p) rate(pri) + length(x)
+
 # Normal likelihood
 
 # known sigma
@@ -190,3 +198,16 @@ ps = posterior_sample(pri, Bernoulli, x)
 @test isa(ps, Bernoulli)
 @test zero(ps.p0) <= ps.p0 <= one(ps.p0)
 @test zero(ps.p1) <= ps.p1 <= one(ps.p1)
+
+# posterior predictive
+
+# TODO: BetaBinomial
+
+# Gamma -- Poisson
+pri = Gamma(1.5, 2.0)
+x = rand(Poisson(2.0), n)
+p = posterior_pred(pri, Poisson, x)
+
+@test isa(p, NegativeBinomial)
+@test_approx_eq mean(p) (pri.shape + sum(x)) / (rate(pri) + length(x))
+@test_approx_eq var(p) (pri.shape + sum(x))*(length(x) + rate(pri) + 1.)/(length(x) + rate(pri)).^2

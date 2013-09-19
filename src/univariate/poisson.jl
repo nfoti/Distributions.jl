@@ -59,3 +59,14 @@ function fit_mle(::Type{Poisson}, x::Array)
     end
     Poisson(mean(x))
 end
+
+immutable PoissonStats <: SufficientStats
+    sx::Float64   # (weighted) sum of x
+    sw::Float64   # sum of sample weights
+
+    PoissonStats(sx::Real, sw::Real) = new(float64(sx), float64(sw))
+end
+
+suffstats(::Type{Poisson}, x::Array) = PoissonStats(sum(x), length(x))
+    
+suffstats(::Type{Poisson}, x::Array, w::Array) = PoissonStats(dot(x, w), sum(w))
