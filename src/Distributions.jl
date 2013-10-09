@@ -142,6 +142,9 @@ export
     posterior_rand,  # draw samples from the posterior distribution
     posterior_rand!, 
     posterior_randmodel,
+    posterior_make,  # create a distribution/model from params obtained from posterior 
+    posterior_sample,
+    posterior_pred,
     scale,         # scale parameter of a distribution
     rate,          # rate parameter of a distribution
     sqmahal,       # squared Mahalanobis distance to Gaussian center
@@ -311,6 +314,9 @@ include(joinpath("conjugates", "normal.jl"))
 include(joinpath("conjugates", "mvnormal.jl"))
 
 # other stuff
+
+include("postpred.jl")
+
 include("qq.jl")
 include("estimators.jl")
 
